@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <script src="/js/bootstrap.min.js"> </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        table,
+        tr,
+        td,th {
+            font-size: 20px;
+            font-weight: bold;
+            border: 2px dotted black;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://localhost:3000/api/emp">Home<span
+                            class="sr-only">(current)</span></a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:3000/api/emp/add">Add Employee <span
+                            class="sr-only">(current)</span></a>
+                </li>
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0" method="GET" action="/api/search/<% value='' %>">
+                <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search"
+                    aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" id="sarch" name="sarch"
+                    type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container text-center mt-5">
+        <table class="table" id="emp" name="emp">
+            <tr>
+                <th>#</th>
+                <!-- <th>ID</th> -->
+                <th> Full Name</th>
+                <th>Phone </th>
+                <th>Price </th>
+                <th> IsAttend</th>
+                <th colspan="2"> Action </th>
+            </tr>
+            <%let count = 1 %>
+            <% employee.forEach(item=>{ %>
+            <tr>
+                <td> <%=  count++ %> </td>
+                <!-- <td> <%=  item.id %> </td> -->
+                <td> <%= item.name %> </td>
+                <td> <%= item.phone %> </td>
+                <td> <%= item.price %> </td>
+                <td> <% if(item.isAttend){  %>
+                    <img width="40px" src="/public/assets/true.jpg" alt="">
+                    <% } else { %>
+                    <img width="40px" src="/public/assets/false.png" alt="">
+                    <% }%>
+                </td>
+                <td> <a href="/api/emp/<%= item.id%>"> <button class="btn btn-primary"> Edite </button> </a> </td>
+
+                <td> <button type="submit" class="btn btn-danger">Delate</button></td>
+
+            </tr>
+
+            <% })%>
+        </table>
+    </div>
+
+</body>
+
+</html>
